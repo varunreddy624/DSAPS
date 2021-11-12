@@ -1,0 +1,81 @@
+   // tree.insertNodeRecursive(3,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(2,tree.root,nullptr);
+    // tree.insertNodeRecursive(4,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(5,tree.root,nullptr);
+    // tree.insertNodeRecursive(6,tree.root,nullptr);
+
+//----------------- Left ------------------------
+
+    // tree.insertNodeRecursive(13,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(10,tree.root,nullptr);
+    // tree.insertNodeRecursive(15,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(5,tree.root,nullptr);
+    // tree.insertNodeRecursive(11,tree.root,nullptr);
+    // tree.insertNodeRecursive(16,tree.root,nullptr);
+    // tree.insertNodeRecursive(14,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(4,tree.root,nullptr);
+    // tree.insertNodeRecursive(6,tree.root,nullptr);
+
+        // LL 
+        // tree.insertNodeRecursive(3,tree.root,nullptr);
+
+        //LR
+        // tree.insertNodeRecursive(7,tree.root,nullptr);
+
+//----------------- Left  ------------------------
+
+
+//--------------------- RIGHT -------------------------------
+
+    // tree.insertNodeRecursive(13,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(10,tree.root,nullptr);
+    // tree.insertNodeRecursive(20,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(5,tree.root,nullptr);
+    // tree.insertNodeRecursive(11,tree.root,nullptr);
+    // tree.insertNodeRecursive(15,tree.root,nullptr);
+    // tree.insertNodeRecursive(30,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(25,tree.root,nullptr);
+    // tree.insertNodeRecursive(35,tree.root,nullptr);
+
+    // RR 
+    // tree.insertNodeRecursive(40,tree.root,nullptr);
+
+    //RL
+    // tree.insertNodeRecursive(22,tree.root,nullptr);
+
+//--------------------- RIGHT -------------------------------
+
+//-------------------- DELETE ------------------------------
+    //CASE 1
+
+    // tree.insertNodeRecursive(9,tree.root,nullptr);    
+
+    // tree.insertNodeRecursive(5,tree.root,nullptr);
+    // tree.insertNodeRecursive(10,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(0,tree.root,nullptr);
+    // tree.insertNodeRecursive(6,tree.root,nullptr);
+    // tree.insertNodeRecursive(11,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(-1,tree.root,nullptr);
+    // tree.insertNodeRecursive(1,tree.root,nullptr);
+
+    // tree.insertNodeRecursive(2,tree.root,nullptr);
+
+
+    // tree.deleteNodeRecursive(10,tree.root,nullptr);
+
+    // tree.printTree(tree.root,nullptr,false);
+
+
+    //CASE 2
+
+//-------------------- DELETE ------------------------------
