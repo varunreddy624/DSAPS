@@ -1,0 +1,14 @@
+int main(){
+    int c,q,type,key,value;
+    cin >> c >> q;
+    LFUCache cache(c);
+    while(q--){
+        cin >> type >> key;
+        if(type==1)
+            cout << cache.get(key) << endl;
+        else{
+            cin >> value;
+            cache.put(key,value);
+        }
+    }
+}

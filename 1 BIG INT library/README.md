@@ -1,0 +1,23 @@
+# 1 BIT INT  
+# Final Testing Pending
+- add
+    - E2E complete (see leetcode)
+- sub  
+    - E2E complete
+- mul
+    - E2E complete (see leetcode)
+- mod
+    - Div using paper method
+    - E2E complete
+- gcd  
+    - Euclid's method
+    - E2E complete
+- exp  
+    - Fast Exp
+    - E2E complete
+- calculator  
+    - Infix to Intermediate PostFix
+    - E2E complete
+- factorial
+    - Naive method  
+    - E2E complete
