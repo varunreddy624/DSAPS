@@ -17,3 +17,5 @@
     * K way merge sort
         * Consider all k arrays at once, use heaps to get minimum of all available elements
 * Use ifstreams 
+
+- Check Q3 With hackerrank before submission and test peeyush's testcases

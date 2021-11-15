@@ -1,5 +1,7 @@
-#include <bits/stdc++.h>
+#include <vector>
 #include <string.h>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
