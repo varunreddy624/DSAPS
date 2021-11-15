@@ -18,4 +18,5 @@
         * Consider all k arrays at once, use heaps to get minimum of all available elements
 * Use ifstreams 
 
-- Check Q3 With hackerrank before submission and test peeyush's testcases
+- Check Q3 With hackerrank before submission and test peeyush's testcases  
+- Mention that this programs are done in windows env
