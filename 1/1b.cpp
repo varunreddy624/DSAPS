@@ -55,7 +55,7 @@ int getMin(vector<int>& LCP,int i,int j){
 int getLongestSubStrAtleastKTimes(string s,vector<int>& SA,vector<int>& LCP,int k){
     int i,n=SA.size();
     int ans=-1;
-    for(i=0;i<n-k-1;i++)
+    for(i=0;i<n-k+1;i++)
         ans=max(ans,getMin(LCP,i+1,i+k-1));
     
     if(ans==0)

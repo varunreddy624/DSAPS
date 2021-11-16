@@ -9,6 +9,11 @@
 using namespace std;
 
 vector<int> getSuffixArray(string s){
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+        freopen("err.txt","w",stderr);
+    #endif
     map<string, int> suffixMap;
     int n = s.length();
     vector<int> suffixArr(n);
