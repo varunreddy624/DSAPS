@@ -1,5 +1,4 @@
 - Check Q3 With hackerrank before submission and test peeyush's testcases  
-- Q2 done with windows env in mind  
-- This commit contains O(N^2) code for 1.3 and gives correct answer, previous commit contains O(NlogN) code that works for **almost** all cases  
+- Q2 done with windows env in mind    
 - Testing pending for all questions  
-- Remove taking input from files at the start of each main function
+- Remove taking input from files at the start of each main function  

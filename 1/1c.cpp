@@ -27,17 +27,11 @@ vector<int> getSuffixArray(string s){
     return suffixArr;
 }
 
-vector<int> getRankArr(vector<int>& SA){
-    int n=SA.size();
-    vector<int> RANK(n,0);
+vector<int> getLCPFromSA(string s,vector<int>& SA){
+    int n=SA.size(),k,h=0;
+    vector<int> RANK(n,0),LCP(n,0);
     for(int i=0;i<n;i++)
         RANK[SA[i]]=i;
-    return RANK;
-}
-
-vector<int> getLCPFromSA(string s,vector<int>& SA,vector<int>& RANK){
-    int h=0,k,n=s.length();
-    vector<int> LCP(n,0);
     for(int i=0;i<n;i++){
         if(RANK[i]>0){
             k=SA[RANK[i]-1];
@@ -49,14 +43,6 @@ vector<int> getLCPFromSA(string s,vector<int>& SA,vector<int>& RANK){
         }
     }
     return LCP;
-}
-
-int getMinRange(int i,int j,vector<int>& LCP){
-    int ans=LCP[i];
-    for(int k=i+1;k<=j;k++)
-        ans=min(ans,LCP[k]);
-    
-    return ans;
 }
 
 int main(){
@@ -71,56 +57,25 @@ int main(){
     string srev="";
     for(int i=n-1;i>=0;i--)
         srev+=s[i];
-    s=s+"~"+srev;
+    s=s+"$"+srev;
     vector<int> SA = getSuffixArray(s);
-    vector<int> RANK = getRankArr(SA);
-    vector<int> LCP = getLCPFromSA(s,SA,RANK);
-
-    // cout << "i" << "\t\t" << "SA"  << "\t\t" <<  "LCP" << "\t\t" << "RANK" <<  "\t\t" << "suffix"<< "\t\t" << endl;
-
-    // cout << endl;
-
-    // for(i=0;i<=2*n;i++)
-    //     cout << i << "\t\t" << SA[i]  << "\t\t" <<  LCP[i] << "\t\t" << RANK[i] <<  "\t\t" << s.substr(SA[i]) << "\t\t" << endl;
-    // cout << endl;
+    vector<int> LCP = getLCPFromSA(s,SA);
+    for(i=0;i<=2*n;i++)
+        cout << SA[i] << " " << s.substr(SA[i]) << endl;
+    cout << endl;
+    for(i=0;i<=2*n;i++)
+        cout << LCP[i] << " ";
+    
+    cout << endl;
 
     int ind=SA[0],length=1;
-
-    // even
-
-    for(i=1;i<n;i++){
-        int leftInd=i,rightInd=(2*n)-i;
-        int leftIndLCPInd = RANK[leftInd];
-        int rightIndLCPInd = RANK[rightInd];
-        int start = min(leftIndLCPInd,rightIndLCPInd);
-        int end = max(leftIndLCPInd,rightIndLCPInd);
-        int temp = getMinRange(start+1,end,LCP);
-        // cout << leftInd << " " << rightInd << " " << rightIndLCPInd << " " << leftIndLCPInd << " " << temp << endl;
-        int len = (2*temp)-1;
-        if(len > length){
-            length = len;
-            ind = i-temp+1;
+    for(i=1;i<=2*n;i++){
+        if((SA[i]>=n && SA[i-1]<n) || (SA[i]<n && SA[i-1]>=n)){
+            if(LCP[i]>length){
+                length=LCP[i];
+                ind=min(SA[i],SA[i-1]);
+            }
         }
     }
-
-    // odd
-
-    for(i=1;i<n;i++){
-        int leftInd=i,rightInd=(2*n)+1-i;
-        int leftIndLCPInd = RANK[leftInd];
-        int rightIndLCPInd = RANK[rightInd];
-        int start = min(leftIndLCPInd,rightIndLCPInd);
-        int end = max(leftIndLCPInd,rightIndLCPInd);
-        int temp = getMinRange(start+1,end,LCP);
-        // cout << leftInd << " " << rightInd << " " << rightIndLCPInd << " " << leftIndLCPInd << " " << temp << endl;
-        int len = (2*temp);
-        if(len > length){
-            length = len;
-            ind = i-temp;
-        }
-    }
-
-    // cout << ind << " " << length << endl;
-
     cout << s.substr(ind,length);
 }
