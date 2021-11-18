@@ -3,11 +3,59 @@
 #include <string.h>
 #include <string>
 #include <vector>
-#include <map>
 #include <algorithm>
 #include <iostream>
+#include <climits>
+#include <math.h>
 
 using namespace std;
+
+class SegmentTree{
+    public:
+        int n;
+        vector<int> segmentTree;
+        int RMQ(int segmentStart, int segmentEnd, int queryStart, int queryEnd, int index)
+        {
+            if (queryStart <= segmentStart && queryEnd >= segmentEnd)
+                return segmentTree[index];
+
+            if (segmentEnd < queryStart || segmentStart > queryEnd)
+                return INT_MAX;
+
+            int mid = segmentStart + (segmentEnd-segmentStart)/2 ;
+            return min(RMQ(segmentStart, mid, queryStart, queryEnd, 2*index+1),RMQ(mid+1, segmentEnd, queryStart, queryEnd, 2*index+2));
+        }
+
+        int getMinRange(int i,int j){
+            return RMQ(0,n-1,i,j,0);
+        }
+
+        int constructSTUtil(vector<int>& arr, int segmentStart, int segmentEnd, int segmentIndex)
+        {
+            if (segmentStart == segmentEnd){
+                segmentTree[segmentIndex] = arr[segmentStart];
+                return arr[segmentStart];
+            }
+
+            int mid = segmentStart + (segmentEnd-segmentStart)/2 ;
+            segmentTree[segmentIndex] = min(constructSTUtil(arr, segmentStart, mid, segmentIndex*2+1),constructSTUtil(arr, mid+1, segmentEnd, segmentIndex*2+2));
+            return segmentTree[segmentIndex];
+        }
+
+        void constructST(vector<int>& arr)
+        {
+            n=arr.size();
+            int x = (int)(ceil(log2(n)));
+
+            int max_size = 2*(int)pow(2, x) - 1;
+
+            segmentTree.resize(max_size);
+
+            constructSTUtil(arr, 0, n-1, 0);
+
+            return ;
+        }
+};
 
 bool cmp(vector<int> a,vector<int> b){
     if(a[0]==b[0]){
@@ -92,18 +140,19 @@ vector<int> getLCPFromSA(string s,vector<int>& SA){
     return LCP;
 }
 
-int getMin(vector<int>& LCP,int i,int j){
-    int ans = LCP[i];
-    for(int k=i+1;k<=j;k++)
-        ans=min(ans,LCP[k]);
-    return ans;
-}
+int getLongestSubStrAtleastKTimes(string s,vector<int>& LCP,int k){
 
-int getLongestSubStrAtleastKTimes(string s,vector<int>& SA,vector<int>& LCP,int k){
-    int i,n=SA.size();
-    int ans=-1;
+    int i,n=LCP.size(),ans=-1;
+
+    if(k==1)
+        return s.length();
+    
+    SegmentTree st;
+    st.constructST(LCP);
+
     for(i=0;i<n-k+1;i++)
-        ans=max(ans,getMin(LCP,i+1,i+k-1));
+        ans=max(ans,st.getMinRange(i+1,i+k-1));
+    
     
     if(ans==0)
         return -1;
@@ -121,13 +170,8 @@ int main(){
     cin >> s;
     int n=s.length(),k,i;
     vector<int> SA = getSuffixArray(s);
-    // vector<int> LCP = getLCPFromSA(s,SA);
-    for(i=0;i<n;i++)
-        cout << SA[i] << " ";
-    // cout << endl;
-    // for(i=0;i<n;i++)
-    //     cout << LCP[i] << " ";
+    vector<int> LCP = getLCPFromSA(s,SA);
 
-    // cin >> k;
-    // cout << getLongestSubStrAtleastKTimes(s,SA,LCP,k) << endl;
+    cin >> k;
+    cout << getLongestSubStrAtleastKTimes(s,LCP,k) << endl;
 }
