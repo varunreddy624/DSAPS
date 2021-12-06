@@ -1,8 +1,0 @@
-- Check Q3 With hackerrank before submission and test peeyush's testcases  
-- Q2 done with windows env in mind    
-- Testing pending for all questions  
-- 3rd question already tested in hackerrank  
-- 2nd question rajat's sort testing cpp file  
-- 1.b hackerearth  
-- 1.c leetcode (not lexicographically smallest)
-- Remove taking input from files at the start of each main function  
