@@ -6,7 +6,7 @@
 #include <iostream>
 #include <algorithm>
 
-#define NUMBER_OF_INTS_PER_FILE 1000000 // 10 MB
+#define NUMBER_OF_INTS_PER_FILE 1000000 //
 
 using namespace std;
 

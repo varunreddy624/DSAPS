@@ -3,11 +3,10 @@
 #include <string.h>
 #include <string>
 #include <vector>
-#include <map>
+#include <algorithm>
 #include <iostream>
 #include <climits>
 #include <math.h>
-#include <algorithm>
 
 using namespace std;
 
@@ -123,17 +122,11 @@ vector<int> getSuffixArray(string s){
     return SA;
 }
 
-vector<int> getRankArr(vector<int>& SA){
-    int n=SA.size();
-    vector<int> RANK(n,0);
+vector<int> getLCPFromSA(string s,vector<int>& SA){
+    int n=SA.size(),k,h=0;
+    vector<int> RANK(n,0),LCP(n,0);
     for(int i=0;i<n;i++)
         RANK[SA[i]]=i;
-    return RANK;
-}
-
-vector<int> getLCPFromSA(string s,vector<int>& SA,vector<int>& RANK){
-    int h=0,k,n=s.length();
-    vector<int> LCP(n,0);
     for(int i=0;i<n;i++){
         if(RANK[i]>0){
             k=SA[RANK[i]-1];
@@ -147,75 +140,33 @@ vector<int> getLCPFromSA(string s,vector<int>& SA,vector<int>& RANK){
     return LCP;
 }
 
+int getLongestSubStrAtleastKTimes(string s,vector<int>& LCP,int k){
+
+    int i,n=LCP.size(),ans=-1;
+
+    if(k==1)
+        return s.length();
+    
+    SegmentTree st;
+    st.constructST(LCP);
+
+    for(i=0;i<n-k+1;i++)
+        ans=max(ans,st.getMinRange(i+1,i+k-1));
+    
+    
+    if(ans==0)
+        return -1;
+    else
+        return ans; 
+}
+
 int main(){
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-        freopen("err.txt","w",stderr);
-    #endif
     string s;
     cin >> s;
     int n=s.length(),k,i;
-    string srev="";
-    for(int i=n-1;i>=0;i--)
-        srev+=s[i];
-    s=s+"~"+srev;
     vector<int> SA = getSuffixArray(s);
-    vector<int> RANK = getRankArr(SA);
-    vector<int> LCP = getLCPFromSA(s,SA,RANK);
+    vector<int> LCP = getLCPFromSA(s,SA);
 
-    int ind=SA[0],length=1;
-
-    SegmentTree st;
-    st.constructST(LCP);
-    
-    int leftInd,rightInd,leftEvenInd,rightEvenInd,leftOddInd,rightOddInd,oddLen,evenLen;
-
-    for(i=0;i<2*n;i++){
-
-            if(SA[i]>n){
-                rightInd=SA[i];
-                leftOddInd=RANK[(2*n)-rightInd];
-                leftEvenInd=(((2*n)-rightInd+1)<2*n) ? RANK[(2*n)-rightInd+1] : 2*n;
-                int oddLCP = st.getMinRange(min(leftOddInd,i)+1,max(leftOddInd,i));
-                int evenLCP = st.getMinRange(min(leftEvenInd,i)+1,max(leftEvenInd,i));
-                oddLen = (oddLCP==INT_MAX) ? 0 :(2*oddLCP)-1;
-                evenLen = (evenLCP==INT_MAX)? 0 : (2*evenLCP);
-                if(oddLen > evenLen){
-                    if(oddLen > length){
-                        length=oddLen;
-                        ind = (2*n)-rightInd-oddLCP+1;
-                    }
-                }
-                else{
-                    if(evenLen > length){
-                        length=evenLen;
-                        ind = (2*n)-rightInd+1-evenLCP;
-                    } 
-                }
-            }
-
-            else{
-                leftInd=SA[i];
-                rightEvenInd= (((2*n)-leftInd+1)<2*n) ? RANK[(2*n)-leftInd+1] : 2*n ;
-                rightOddInd=RANK[(2*n)-leftInd];
-                int oddLCP = st.getMinRange(min(rightOddInd,i)+1,max(rightOddInd,i));
-                int evenLCP = st.getMinRange(min(rightEvenInd,i)+1,max(rightEvenInd,i));
-                oddLen = (oddLCP==INT_MAX) ? 0 :(2*oddLCP)-1;
-                evenLen = (evenLCP==INT_MAX)? 0 : (2*evenLCP);
-                if(oddLen > evenLen){
-                    if(oddLen > length){
-                        length=oddLen;
-                        ind = leftInd-oddLCP+1;
-                    }
-                }
-                else{
-                    if(evenLen > length){
-                        length=evenLen;
-                        ind = leftInd-evenLCP;
-                    } 
-                }
-            }
-    }
-    cout << s.substr(ind,length);
+    cin >> k;
+    cout << getLongestSubStrAtleastKTimes(s,LCP,k) << endl;
 }

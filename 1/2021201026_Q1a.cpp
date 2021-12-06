@@ -75,11 +75,6 @@ vector<int> getSuffixArray(string s){
 }
 
 int main(){
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-        freopen("err.txt","w",stderr);
-    #endif
     string s;
     cin >> s;
     int n=s.length();

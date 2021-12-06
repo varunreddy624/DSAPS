@@ -88,18 +88,13 @@ vector<long long int> maxXor(vector<long long int>& arr, vector<long long int>& 
 int main()
 {
 
-    int n;
-    cin >> n;
+    int n,m;
+    cin >> n >> m;
 
-    vector<long long int> arr(n);
+    vector<long long int> arr(n),queries(m);
 
     for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    int m;
-    cin >> m;
-
-    vector<long long int> queries(m);
+        cin >> arr[i]; 
 
     for (int i = 0; i < m; i++) 
         cin >> queries[i];

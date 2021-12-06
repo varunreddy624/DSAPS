@@ -19,7 +19,7 @@ from math import ceil
 import sys
 import time
 
-n_values = 10_000_000
+n_values = 1000000
 n_digits = 4
 default_seed = 1337
 BUFFER_SIZE = 100_000
